@@ -6,7 +6,10 @@
   "scripts": {
     "deploy": "npm run clean && npm run build && aws lambda update-function-code --function-name employees --zip-file fileb://build.zip --publish",
     "clean": "rm build.zip",
-    "build": "zip -r build.zip node_modules index.js app.js routes.js"
+    "build": "zip -r build.zip node_modules index.js app.js routes.js",
+    "create-database": "aws dynamodb create-table --cli-input-json file://employee-table-model.json --endpoint-url http://localhost:8080",
+    "start": "TABLE='employees' node app-local",
+    "dynamodb-local-run": "docker-compose up"
   },
   "author": "",
   "license": "ISC",
